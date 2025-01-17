@@ -61,7 +61,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       .pipe(
         debounceTime(500),
         tap(() => {
-          this.store.dispatch(loadSearchData());
           this.isLoading = true;
           this.noResults = false;
         }),
