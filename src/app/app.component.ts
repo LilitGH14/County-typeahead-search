@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { GlobalService } from './service/global.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'task';
+  loading$;
+  error$;
+
+  constructor(private globalService: GlobalService) {
+    this.loading$ = this.globalService.loading$;
+    this.error$ = this.globalService.error$;
+  }
 }

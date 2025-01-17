@@ -1,0 +1,36 @@
+<div class="typeahead-container">
+  <div class="inp">
+    <label>Country Name</label>
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange($event)"
+      (input)="onChange($event)"
+      placeholder="Search by country name..."
+      class="search-input"
+    />
+    @if(suggestions.length>0){
+    <div>
+      @for(suggestion of suggestions; track suggestion){
+      <p (click)="selectSuggestion(suggestion)">{{ suggestion }}</p>
+      }
+    </div>
+    }
+  </div>
+
+  @if((countries$ | async | length )> 0){
+  <div>
+    <h4>Results ({{ countries$ | async | length }})</h4>
+    <ul class="results-list" #uiElement (scroll)="loadData()">
+      <app-card
+        *ngFor="let country of countries"
+        [country]="country | countryCard"
+      ></app-card>
+    </ul>
+  </div>
+  } @else { 
+      @if(noResults && searchTerm && !isLoading){
+          <div class="no-results">No results!</div>
+      } 
+    }
+</div>

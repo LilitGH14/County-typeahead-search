@@ -1,0 +1,11 @@
+@if(showsToast){
+<div id="errorToast" class="toast">
+  <div class="header">
+    <h3>Something went wrong!</h3>
+    <button class="close-btn" (click)="showsToast = !showsToast">x</button>
+  </div>
+  <div class="content">
+    <p>{{ error() }}</p>
+  </div>
+</div>
+}
